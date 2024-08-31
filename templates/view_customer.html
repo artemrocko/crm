@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h1>Інформація про клієнта</h1>
+
+    <p><strong>Ім'я:</strong> {{ customer.name }}</p>
+    <p><strong>Email:</strong> {{ customer.email }}</p>
+    <p><strong>Телефон:</strong> {{ customer.phone }}</p>
+    <p><strong>Дата:</strong> {{ customer.date }}</p>
+    <p><strong>Пароль:</strong> {{ customer.password }}</p>
+    <p><strong>Логін:</strong> {{ customer.login }}</p>
+    <p><strong>Podstawa:</strong> {{ customer.podstawa }}</p>
+    <p><strong>Номер справи:</strong> {{ customer.case_number }}</p>
+    <p><strong>Контакт:</strong> {{ customer.contact }}</p>
+    <p><strong>Вид умови:</strong> {{ customer.condition_type }}</p>
+    <p><strong>Задаток:</strong> {{ customer.deposit }}</p>
+    <p><strong>Платність:</strong> {{ customer.paid }}</p>
+    <p><strong>Документи:</strong> {{ customer.documents }}</p>
+
+    {% if customer.profile_picture %}
+    <p><strong>Фото профілю:</strong></p>
+    <img src="{{ url_for('static', filename='uploads/' + customer.profile_picture) }}" alt="Фото профілю">
+    {% endif %}
+
+    <a href="{{ url_for('edit_customer', id=customer.id) }}">Редагувати інформацію</a> |
+    <a href="{{ url_for('index') }}">Назад до списку клієнтів</a>
+</div>
+{% endblock %}

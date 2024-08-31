@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify 2FA</title>
+</head>
+<body>
+    <h1>Введіть ваш 2FA код</h1>
+    <form method="POST" action="{{ url_for('verify_2fa') }}">
+        <input type="text" name="token" placeholder="2FA код">
+        <button type="submit">Перевірити</button>
+    </form>
+</body>
+</html>

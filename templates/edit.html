@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редагування клієнта</title>
+</head>
+<body>
+    <h1>Редагування клієнта</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="text" name="name" value="{{ customer.name }}" required>
+        <input type="email" name="email" value="{{ customer.email }}" required>
+        <input type="text" name="phone" value="{{ customer.phone }}" required>
+        <textarea name="notes" placeholder="Нотатки">{{ customer.notes }}</textarea>  <!-- Поле для нотаток -->
+        <input type="file" name="profile_picture">
+        <button type="submit">Оновити</button>
+    </form>
+</body>
+</html>

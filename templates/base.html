@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Головна</a></li>
+            <li><a href="{{ url_for('statistics') }}">Статистика</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Панель управління</a></li>
+            <li><a href="{{ url_for('settings') }}">Налаштування</a></li> <!-- Додайте цей рядок -->
+            <li><a href="{{ url_for('logout') }}">Вихід</a></li>
+        </ul>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

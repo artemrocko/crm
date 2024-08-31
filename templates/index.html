@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Клієнти</h1>
+
+<form method="GET" action="{{ url_for('index') }}">
+    <input type="text" name="query" placeholder="Пошук клієнтів...">
+    <button type="submit">Шукати</button>
+</form>
+
+<a href="{{ url_for('index', sort_by='name') }}">Сортувати за ім'ям</a> |
+<a href="{{ url_for('index', sort_by='email') }}">Сортувати за електронною поштою</a>
+
+<h2>Додати нового клієнта</h2>
+<form method="POST" action="{{ url_for('add_customer') }}" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="Ім'я" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="phone" placeholder="Телефон" required>
+    <input type="date" name="date" placeholder="Дата">
+    <input type="text" name="password" placeholder="Пароль">
+    <input type="text" name="login" placeholder="Логін">
+    <input type="text" name="podstawa" placeholder="Podstawa">
+    <input type="text" name="case_number" placeholder="Номер справи">
+    <input type="text" name="contact" placeholder="Контакт">
+    <input type="text" name="condition_type" placeholder="Вид умови">
+    <input type="text" name="deposit" placeholder="Задаток">
+    <input type="text" name="paid" placeholder="Платність">
+    <input type="text" name="documents" placeholder="Документи">
+    <input type="text" name="tags" placeholder="Теги (через кому)">
+    <input type="file" name="profile_picture">
+    <button type="submit">Додати</button>
+</form>
+
+<a href="{{ url_for('statistics') }}">Переглянути статистику</a>
+<a href="{{ url_for('dashboard') }}">Dashboard</a>
+
+
+<table id="customersTable">
+    <thead>
+        <tr>
+            <th>Ім'я</th>
+            <th>Email</th>
+            <th>Телефон</th>
+            <th>Теги</th>
+            <th>Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer in customers %}
+        <tr>
+            <td>
+                <a href="{{ url_for('view_customer', id=customer.id) }}">
+                    {{ customer.name }} 
+                    {% if task_count[customer.id] > 0 %}
+                        <span class='task-indicator'>({{ task_count[customer.id] }})</span>
+                    {% endif %}
+                </a>
+            </td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.phone }}</td>
+            <td>
+                {% for tag in customer.tags %}
+                    <span class="tag">{{ tag.name }}</span>
+                {% endfor %}
+            </td>
+            <td>
+                <a href="{{ url_for('view_customer', id=customer.id) }}">Інформація про клієнта</a> |
+                <a href="{{ url_for('download_report', customer_id=customer.id) }}">Завантажити звіт</a> |
+                <a href="{{ url_for('send_email', id=customer.id) }}">Відправити листа</a> |
+                <a href="{{ url_for('view_tasks', customer_id=customer.id) }}">Переглянути завдання</a> |
+                <a href="{{ url_for('delete_customer', id=customer.id) }}" onclick="return confirm('Ви впевнені?')">Видалити</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#customersTable').DataTable();
+    });
+</script>
+{% endblock %}

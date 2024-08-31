@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статистика завдань</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Статистика завдань</h1>
+
+    <div>
+        <h2>Загальна інформація</h2>
+        <p>Загальна кількість завдань: {{ total_tasks }}</p>
+        <p>Завершені завдання: {{ completed_tasks }}</p>
+        <p>Незавершені завдання: {{ not_completed_tasks }}</p>
+    </div>
+
+    <div>
+        <h2>Кількість завдань на кожного клієнта</h2>
+    </div>
+
+    <a href="{{ url_for('index') }}">Назад до головної</a>
+</body>
+</html>
+
+{% endblock %}

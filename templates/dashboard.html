@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Панель управління</h1>
+    <div class="stats">
+        <div class="stat-card">
+            <h2>Кількість клієнтів</h2>
+            <p>{{ total_customers }}</p>
+        </div>
+        <div class="stat-card">
+            <h2>Активні завдання</h2>
+            <p>{{ active_tasks }}</p>
+        </div>
+        <div class="stat-card">
+            <h2>Завершені завдання</h2>
+            <p>{{ completed_tasks }}</p>
+        </div>
+        <div class="stat-card">
+            <h2>Прострочені завдання</h2>
+            <p>{{ overdue_tasks }}</p>
+        </div>
+    </div>
+    
+    <div class="charts">
+        <h2>Графік виконання завдань за тиждень</h2>
+        <canvas id="tasksChart"></canvas>
+    </div>
+    
+    <div class="recent-tasks">
+        <h2>Останні події</h2>
+        <h3>Останні додані завдання</h3>
+        <ul>
+            {% for task in recent_tasks %}
+            <li>{{ task.title }} ({{ task.due_date }}): {{ task.description }}</li>
+            {% endfor %}
+        </ul>
+        <h3>Останні завершені завдання</h3>
+        <ul>
+            {% for task in completed_recent_tasks %}
+            <li>{{ task.title }} ({{ task.due_date }}): {{ task.description }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('tasksChart').getContext('2d');
+    var tasksChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ task_dates }},
+            datasets: [{
+                label: 'Завершені завдання',
+                data: {{ tasks_per_day }},
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

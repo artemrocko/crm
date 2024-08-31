@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Додати клієнта</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Додати нового клієнта</h1>
+    <form method="POST" action="{{ url_for('add_customer') }}" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Ім'я" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="phone" placeholder="Телефон" required>
+        <input type="date" name="date" placeholder="Дата">
+        <input type="text" name="password" placeholder="Пароль">
+        <input type="text" name="login" placeholder="Логін">
+        <input type="text" name="podstawa" placeholder="Podstawa">
+        <input type="text" name="case_number" placeholder="Номер справи">
+        <input type="text" name="contact" placeholder="Контакт">
+        <input type="text" name="condition_type" placeholder="Вид умови">
+        <input type="text" name="deposit" placeholder="Задаток">
+        <input type="text" name="paid" placeholder="Платність">
+        <input type="text" name="documents" placeholder="Документи">
+        <input type="text" name="tags" placeholder="Теги (через кому)">
+        <input type="file" name="profile_picture">
+        <button type="submit">Додати</button>
+    </form>
+</body>
+</html>

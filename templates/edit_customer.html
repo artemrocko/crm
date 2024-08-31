@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" action="{{ url_for('edit_customer', id=customer.id) }}" enctype="multipart/form-data">
+    <table style="width: 100%; max-width: 600px; margin: auto; border-collapse: collapse;">
+        <tr>
+            <td><label for="name">Ім'я:</label></td>
+            <td><input type="text" name="name" value="{{ customer.name }}" placeholder="Ім'я" required></td>
+        </tr>
+        <tr>
+            <td><label for="email">Email:</label></td>
+            <td><input type="email" name="email" value="{{ customer.email }}" placeholder="Email" required></td>
+        </tr>
+        <tr>
+            <td><label for="phone">Телефон:</label></td>
+            <td><input type="text" name="phone" value="{{ customer.phone }}" placeholder="Телефон" required></td>
+        </tr>
+        <tr>
+            <td><label for="date">Дата:</label></td>
+            <td><input type="date" name="date" value="{{ customer.date }}"></td>
+        </tr>
+        <tr>
+            <td><label for="password">Пароль:</label></td>
+            <td><input type="text" name="password" value="{{ customer.password }}" placeholder="Пароль"></td>
+        </tr>
+        <tr>
+            <td><label for="login">Логін:</label></td>
+            <td><input type="text" name="login" value="{{ customer.login }}" placeholder="Логін"></td>
+        </tr>
+        <tr>
+            <td><label for="podstawa">Podstawa:</label></td>
+            <td><input type="text" name="podstawa" value="{{ customer.podstawa }}" placeholder="Podstawa"></td>
+        </tr>
+        <tr>
+            <td><label for="case_number">Номер справи:</label></td>
+            <td><input type="text" name="case_number" value="{{ customer.case_number }}" placeholder="Номер справи"></td>
+        </tr>
+        <tr>
+            <td><label for="contact">Контакт:</label></td>
+            <td><input type="text" name="contact" value="{{ customer.contact }}" placeholder="Контакт"></td>
+        </tr>
+        <tr>
+            <td><label for="condition_type">Вид умови:</label></td>
+            <td><input type="text" name="condition_type" value="{{ customer.condition_type }}" placeholder="Вид умови"></td>
+        </tr>
+        <tr>
+            <td><label for="deposit">Задаток:</label></td>
+            <td><input type="text" name="deposit" value="{{ customer.deposit }}" placeholder="Задаток"></td>
+        </tr>
+        <tr>
+            <td><label for="paid">Платність:</label></td>
+            <td><input type="text" name="paid" value="{{ customer.paid }}" placeholder="Платність"></td>
+        </tr>
+        <tr>
+            <td><label for="documents">Документи:</label></td>
+            <td><input type="text" name="documents" value="{{ customer.documents }}" placeholder="Документи"></td>
+        </tr>
+        <tr>
+            <td><label for="profile_picture">Зображення профілю:</label></td>
+            <td><input type="file" name="profile_picture"></td>
+        </tr>
+        <tr>
+            <td><label for="tags">Теги (введіть через кому):</label></td>
+            <td><input type="text" name="tags" value="{% for tag in customer.tags %}{{ tag.name }}{% if not loop.last %}, {% endif %}{% endfor %}" placeholder="Теги, розділені комами"></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <button type="submit">Зберегти зміни</button>
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

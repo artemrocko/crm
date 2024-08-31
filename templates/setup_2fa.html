@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup 2FA</title>
+</head>
+<body>
+    <h1>Налаштування двофакторної аутентифікації (2FA)</h1>
+    <p>Скануйте цей QR-код у вашому додатку для аутентифікації (наприклад, Google Authenticator):</p>
+    <img src="{{ url }}" alt="QR Code">
+    <form method="POST" action="{{ url_for('setup_2fa') }}">
+        <button type="submit">Зберегти та активувати 2FA</button>
+    </form>
+</body>
+</html>

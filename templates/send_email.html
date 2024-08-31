@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Надіслати листа клієнту</title>
+</head>
+<body>
+    <h1>Надіслати листа клієнту {{ customer.name }}</h1>
+    
+    <form method="POST" action="{{ url_for('send_email', id=customer.id) }}">
+        <label for="subject">Тема:</label>
+        <input type="text" id="subject" name="subject" required>
+        <br>
+        <label for="body">Текст повідомлення:</label>
+        <textarea id="body" name="body" required></textarea>
+        <br>
+        <button type="submit">Надіслати</button>
+    </form>
+    
+    <a href="{{ url_for('index') }}">Повернутись до списку клієнтів</a>
+</body>
+</html>

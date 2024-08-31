@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реєстрація</title>
+</head>
+<body>
+    <h1>Реєстрація</h1>
+    
+    <form method="POST" action="{{ url_for('register') }}">
+        <input type="text" name="username" placeholder="Ім'я користувача" required>
+        <input type="password" name="password" placeholder="Пароль" required>
+        <button type="submit">Зареєструватись</button>
+    </form>
+
+    <a href="{{ url_for('login') }}">Вже маєте акаунт? Увійдіть</a>
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання для {{ customer.name }}</title>
+    <style>
+        .task-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .task-card.completed { border-left: 5px solid #2ecc71; }
+        .task-card.overdue { border-left: 5px solid #e74c3c; }
+        .task-card.in-progress { border-left: 5px solid #f39c12; }
+        .task-status { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Завдання для {{ customer.name }}</h1>
+
+    <div>
+        <a href="{{ url_for('view_tasks', customer_id=customer.id) }}">Всі завдання</a> |
+        <a href="{{ url_for('view_tasks', customer_id=customer.id, filter_status='completed') }}">Завершені завдання</a> |
+        <a href="{{ url_for('view_tasks', customer_id=customer.id, filter_status='not_completed') }}">Незавершені завдання</a>
+    </div>
+
+    <div class="task-list">
+        {% for task in tasks %}
+        <div class="task-card {% if task.completed %}completed{% elif task.due_date and task.due_date < current_time %}overdue{% else %}in-progress{% endif %}">
+            <div>
+                <strong>{{ task.title }}</strong> ({{ task.due_date }}): {{ task.description }}
+            </div>
+            <div class="task-status">
+                {% if task.completed %}
+                <span style="color: green;">[Завершено]</span>
+                {% elif task.due_date and task.due_date < current_time %}
+                <span style="color: red;">[Прострочено]</span>
+                {% else %}
+                <span style="color: orange;">[В процесі]</span>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <a href="{{ url_for('add_task', customer_id=customer.id) }}">Додати нове завдання</a>
+</body>
+</html>
+{% endblock %}
